@@ -1,7 +1,7 @@
 ---
 title: "NEUROLM: A UNIVERSAL MULTI-TASK FOUNDATION MODEL FOR BRIDGING THE GAP BETWEEN LANGUAGE AND EEG SIGNALS"
 link: "[https://arxiv.org/pdf/2409.00101]"
-date: 2026-06-22
+date: 2026-07-20
 author: qiuyun zhang
 tags: ["EEG", "Foundation model"]
 ---
