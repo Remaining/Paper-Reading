@@ -7,9 +7,17 @@ author: qiuyun zhang
 ## 一句话总结内容
 
 传统 EEG 模型在固定数据集上训练完成后参数不再变化，但真实临床/可穿戴应用每天都会出现新的未见受试者。由于生理结构、身体状态等个体差异，固定模型无法持续泛化。作者将真实部署重新建模为“连续到来的个体域”而不是一次性的 target domain。
+
 该场景的核心不是单次域适应，而是 Stability-Plasticity（SP）困境：模型既要对当前新个体具有高 plasticity，又不能因为不断适应而破坏对其他已见/未见个体的 generalization（stability）。
+
 数据被划分为三个互斥受试者集合：labeled source/pretraining set D_S；大量 unlabeled incremental individuals D_T；带标签但只用于评估的 generalization set D_G。
-模型 M0 在 D_S 预训练，然后 M0→M1→…→M_NT 逐个适应 D_T 中的新个体；每次适应后都到 D_G 上评估 stability。
+
+模型（CNN-Transformer） M0 在 D_S 预训练，然后 M0→M1→…→M_NT 逐个适应 D_T 中的新个体；每次适应后都到 D_G 上评估 stability。
+
+技术创新：CPC 自监督学习与伪标签生成：用户 D 的 EEG 数据没有标签，因此无法直接使用常规监督学习损失训练模型。但我们可以利用 EEG 的时序结构：过去一段时间的信号包含了预测后续特征的一些信息。论文的默认伪标签置信度阈值为 0.9。
+
+Dynamic Confident Buffer防止持续学习过程中出现灾难性遗忘的重要机制：每次有新用户到来时，框架从两类缓存中选择回放样本，默认采用 8:2 的比例，即真实标签样本占 80%，历史伪标签样本占 20%。混合缓存的样本量设置为与当前增量用户数据相同。完成当前用户的适应后，再将该用户中置信度足够高的伪标签样本加入历史缓存。
+
 ![Image text](https://github.com/Remaining/Paper-Reading/blob/main/3.PNG)
 
 实验结果
