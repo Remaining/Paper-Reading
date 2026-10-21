@@ -20,7 +20,9 @@ Dynamic Confident Buffer防止持续学习过程中出现灾难性遗忘的重�
 
 ![Image text](https://github.com/Remaining/Paper-Reading/blob/main/3.PNG)
 
-实验结果
+实验结果：论文还报告了泛化集上的平均任意时刻准确率（AAA）：ISRUC 从 72.0% 提升到 74.1%，FACED 从 24.0% 提升到 36.5%，PhysioNet-MI 从 46.9% 提升到 48.8%。
+
+这些结果说明，模型不仅能改善新用户的适应效果，在作者设定的实验中，未参与适应的用户上的平均表现也得到了改善。
 
 ![Image text](https://github.com/Remaining/Paper-Reading/blob/main/2.PNG)
 
